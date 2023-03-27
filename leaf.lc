@@ -1,0 +1,13 @@
+include "leaf.lh";
+
+int add(int x, int y) {
+  int z = x + y;
+  return z;
+}
+
+int main(void) {
+  #(int, int) cursor = (1, 1);
+  int (x, y) = cursor;
+  
+  return add(3, -3);
+}
