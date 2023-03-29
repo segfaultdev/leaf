@@ -202,6 +202,53 @@ void lf_token(lf_source_t *source) {
       token.type = lf_token_comma;
     } else if (rune == ';') {
       token.type = lf_token_semicolon;
+    } else if (rune == '.') {
+      token.type = lf_token_dot;
+    } else if (rune == '#') {
+      token.type = lf_token_hash;
+    } else if (rune == '(') {
+      token.type = lf_token_left_parenthesis;
+    } else if (rune == ')') {
+      token.type = lf_token_right_parenthesis;
+    } else if (rune == '[') {
+      token.type = lf_token_left_bracket;
+    } else if (rune == ']') {
+      token.type = lf_token_right_bracket;
+    } else if (rune == '{') {
+      token.type = lf_token_left_brace;
+    } else if (rune == '}') {
+      token.type = lf_token_right_brace;
+    } else if (rune == '=') {
+      rune = get_rune(source);
+      
+      if (rune == '=') {
+        token.type = lf_token_equals;
+      } else {
+        token.type = lf_token_assign;
+        unget_rune(source);
+      }
+    } else if (rune == '+') {
+      rune = get_rune(source);
+      
+      if (rune == '+') {
+        token.type = lf_token_increment;
+      } else if (rune == '=') {
+        token.type = lf_token_assign_plus;
+      } else {
+        token.type = lf_token_plus;
+        unget_rune(source);
+      }
+    } else if (rune == '-') {
+      rune = get_rune(source);
+      
+      if (rune == '-') {
+        token.type = lf_token_decrement;
+      } else if (rune == '=') {
+        token.type = lf_token_assign_minus;
+      } else {
+        token.type = lf_token_minus;
+        unget_rune(source);
+      }
     } else {
       TOKEN_ASSERT(1, "Unknown rune: '%lc'.", rune);
     }

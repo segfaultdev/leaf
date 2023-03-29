@@ -33,11 +33,13 @@ int main(int argc, const char *argv[argc]) {
   source.size = ftell(file);
   fseek(file, 0, SEEK_SET);
   
-  source.data = malloc(source.size);
+  source.data = lf_alloc(source.size);
   fread(source.data, 1, source.size, file);
   
   fclose(file);
+  
   lf_token(&source);
+  lf_free(source.data);
   
   return 0;
 }
